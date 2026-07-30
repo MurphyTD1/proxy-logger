@@ -1,10 +1,7 @@
 export default function handler(req, res) {
     const proxyIp = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : req.socket.remoteAddress;
-    
-    // Vercel'in yerel coğrafi başlığından ülke tespiti
     const country = req.headers['x-vercel-ip-country'] || "Bilinmiyor";
     
-    // Anonimlik analizi için başlık kontrolü
     const hasVia = req.headers['via'] ? true : false;
     const hasProxyConnection = req.headers['proxy-connection'] ? true : false;
     const xffCount = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',').length : 1;
